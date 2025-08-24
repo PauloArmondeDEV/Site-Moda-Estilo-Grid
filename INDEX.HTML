@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeria Estudo - Paulo Descomplica</title>
+
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Animações ao rolar com AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+
+  <!-- Fonte moderna do Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+</head>
+
+<meta name="description" content="Galeria de fotos de beleza e moda .">
+
+
+<body>
+
+  <!-- Botões de filtro -->
+  <div class="filter-buttons">
+    <button class="filter-btn active" data-filter="all">Todos</button>
+    <button class="filter-btn" data-filter="Modelos">Modelos</button>
+    <button class="filter-btn" data-filter="Produtos">Produtos</button>
+    <button class="filter-btn" data-filter="Lojas">Lojas</button>
+  </div>
+
+  <!-- Cabeçalho do site -->
+  <header>
+  <div class="header-container">
+    <h1 class="site-title">Galeria Estudo - Paulo Descomplica</h1>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+  <!-- Galeria principal -->
+  <main class="galeria-grid">
+
+    <!-- Cada imagem é envolvida por um "wrapper" com efeito de overlay -->
+    <!-- loading="lazy" já aplicado para melhorar a performance -->
+    <div class="imagem-wrapper">
+      <img src="FOTOSINCIAL/Principal.avif" alt="Imagem principal" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/1.avif" alt="Imagem 1" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/2.avif" alt="Imagem 2" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/3.avif" alt="Imagem 3" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/4.avif" alt="Imagem 4" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/5.avif" alt="Imagem 5" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/6.avif" alt="Imagem 6" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/7.avif" alt="Imagem 7" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+    <div class="imagem-wrapper">
+      <img src="Fotos de posts/8.avif" alt="Imagem 8" loading="lazy" data-aos="fade-up">
+      <div class="overlay"><p>Ver imagem</p></div>
+    </div>
+
+  </main>
+
+  <!-- Lightbox flutuante (modal para ver imagens em destaque) -->
+  <div id="lightbox" class="lightbox">
+    <div class="lightbox-content">
+      <span class="close">&times;</span>
+      <img class="lightbox-img" src="" alt="Imagem ampliada">
+
+      <!-- Botões de navegação -->
+      <div class="nav-buttons">
+        <button id="prev" class="arrow-button">← Anterior</button>
+        <button id="next" class="arrow-button">Próxima →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Rodapé profissional -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-info">
+        <p>📍 Timóteo, MG - Brasil</p>
+        <p>📧 contato@seudominio.com</p>
+        <p>📞 (11) 99999-9999</p>
+      </div>
+      <div class="footer-social">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">Facebook</a>
+      </div>
+    </div>
+    <div class="footer-copy">
+      <p>© 2025 PauloCursoDescomplica. Todos os direitos reservados.</p>
+    </div>
+</footer>
+
+  <!-- Scripts JS -->
+
+  <!-- JS do Lightbox -->
+  <script>
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const closeBtn = document.querySelector('.close');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+
+    const imagens = Array.from(document.querySelectorAll('.imagem-wrapper img'));
+    let currentIndex = 0;
+
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = imagens[currentIndex].src;
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + imagens.length) % imagens.length;
+      lightboxImg.src = imagens[currentIndex].src;
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % imagens.length;
+      lightboxImg.src = imagens[currentIndex].src;
+    }
+
+    imagens.forEach((img, i) => {
+      img.addEventListener('click', () => openLightbox(i));
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
+
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    window.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+    });
+
+    // Swipe para mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', e => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    lightbox.addEventListener('touchend', e => {
+      touchEndX = e.changedTouches[0].screenX;
+      if (touchEndX < touchStartX - 50) showNext();
+      if (touchEndX > touchStartX + 50) showPrev();
+    });
+  </script>
+
+  <!-- JS de animação (AOS) -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>AOS.init();</script>
+
+  <!-- Filtro por categoria -->
+  <script>
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const filterItems = document.querySelectorAll('.imagem-wrapper'); // Certifique-se que eles tenham a classe correta
+
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        const filterValue = button.getAttribute('data-filter');
+
+        filterItems.forEach(item => {
+          if (filterValue === 'all') {
+            item.classList.add('show');
+          } else {
+            item.classList.toggle('show', item.classList.contains(filterValue));
+          }
+        });
+      });
+    });
+
+    // Ativa filtro "Todos" ao carregar
+    document.querySelector('.filter-btn[data-filter="all"]').click();
+  </script>
+</body>
+</html>
